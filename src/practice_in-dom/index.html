@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <style>
+        .container {
+            display: grid;
+            place-items: center;
+
+            #stopwatch {
+                font-size: 5rem;
+            }
+
+            #button-container {
+                display: flex;
+                gap: 1rem;
+
+                button {
+                    margin: 1rem;
+                    padding: 0.5rem 1rem;
+                    font-size: 1.5rem;
+                    border: none;
+                    background-color: #e7bd00;
+                    color: white;
+                    cursor: pointer;
+                    border-radius: 30px;
+
+                    &:first-child {
+                        &:hover {
+                            background-color: #20cf10;
+                        }
+                    }
+
+                    &:last-child {
+                        &:hover {
+                            background-color: #cf1010;
+                        }
+                    }
+
+                    &:nth-child(2) {
+                        &:hover {
+                            background-color: #770c0c;
+                        }
+                    }
+
+                }
+            }
+        }
+    </style>
+    <div class="container">
+        <h1>Stop Watch</h1>
+        <span id="stopwatch">0s</span>
+        <div id="button-container">
+            <button id="start">Start</button>
+            <button id="pause">pause</button>
+            <button id="reset">Reset</button>
+        </div>
+    </div>
+    <script>
+        const stopWatchDom = document.getElementById('stopwatch')
+        function stopWatch() {
+            let startTimer = 0;
+            let timerId;
+            return {
+                start: function () {
+                    if (!timerId) {
+                        timerId = setInterval(() => {
+                            stopWatchDom.innerText = `${startTimer++}s`
+                        }, 100)
+                    }
+                },
+                pause: function () {
+                    clearInterval(timerId)
+                    timerId = null
+                },
+                reset: function () {
+                    this.pause()
+                    startTimer = 0
+                    stopWatchDom.innerText = `${startTimer}s`
+                }
+            }
+        }
+        const getStopWatch = stopWatch();
+        const buttons = document.querySelectorAll('button');
+
+        buttons.forEach((button) => {
+            button.addEventListener('mousedown', (e) => {
+                if ((e.target).id === 'start') {
+                    getStopWatch.start();
+                } else if ((e.target).id === 'pause') {
+                    getStopWatch.pause();
+                }
+                else if ((e.target).id === 'reset') {
+                    getStopWatch.reset();
+                } else {
+                    alert('Mismatch click')
+                }
+
+            });
+        });
+    </script>
+</body>
+
+</html>

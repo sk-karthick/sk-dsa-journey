@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <style>
+        .card-container {
+            display: grid;
+            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            text-align: center;
+
+            .cards {
+                background-color: #faf8f8;
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+
+
+                .name {
+                    font-size: 1.5rem;
+                }
+
+                .price {
+                    font-size: 1.2rem;
+                    color: green;
+                }
+
+                .stock {
+                    font-size: 1.2rem;
+                    color: red;
+                }
+            }
+
+            .cards:hover {
+                box-shadow: 12px 12px 12px #fff inset, -12px -12px -12px #ddd inset;
+                background-color: #ccc;
+            }
+        }
+
+        .container {
+
+            display: grid;
+            place-items: center;
+
+            .finder {
+                width: 100%;
+
+                input {
+                    display: flex;
+                    gap: 1rem;
+                    width: calc(100% - 2rem);
+                    margin-bottom: 1rem;
+                    padding: 10px;
+                    border-radius: 50px;
+                }
+            }
+
+            .finder-buttons {
+                button {
+                    padding: 10px 30px;
+                    border-radius: 50px;
+                    background-color: #13e700;
+                    color: white;
+                    cursor: pointer;
+                    border: none;
+                    font-size: 1.2rem;
+                }
+            }
+
+            .country-container {
+                width: 100%;
+                /* display: flex; */
+                flex-direction: row;
+                align-items: baseline;
+                justify-content: space-evenly;
+                margin-top: 20px;
+            }
+
+            .country-card {
+                padding: 40px;
+                background-color: #ddd;
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+                margin: 10px 0;
+
+                .code {
+                    color: red;
+                    font-size: 2rem;
+                    text-transform: uppercase;
+                    text-align: center;
+                    margin-bottom: 20px;
+                }
+            }
+        }
+    </style>
+
+    <div class="card-container"></div>
+
+    <div class="container">
+        <div class="finder">
+            <input type="text" class="finder-input" id="searchBtn" placeholder="Search for a country">
+        </div>
+        <div class="finder-buttons">
+            <button onclick="customSearchItem()">Search</button>
+        </div>
+        <div class="country-container">
+        </div>
+    </div>
+
+    
+    <script>
+        const fetchDataURL = 'https://reqres.in/api/users?page=2';
+
+        async function fetchData() {
+            try {
+                const response = await fetch(fetchDataURL);
+                if (!response.ok) {
+                    throw new Error(`Data fetch API error: ${response.status}`);
+                }
+                return await response.json();
+            } catch (err) {
+                console.error('Error fetching data:', err.message);
+                throw err;
+            }
+        }
+
+        function createCard(user) {
+            const bodyTag = document.createElement('div');
+            bodyTag.classList.add('cards');
+
+            const name = document.createElement('div');
+            name.classList.add('name');
+            name.textContent = `${user.first_name} ${user.last_name}`;
+            bodyTag.appendChild(name);
+
+            const email = document.createElement('div');
+            email.classList.add('email');
+            email.textContent = user.email;
+            bodyTag.appendChild(email);
+
+            const image = document.createElement('img');
+            image.classList.add('image');
+            image.src = user.avatar;
+            bodyTag.appendChild(image);
+
+            return bodyTag;
+        }
+
+        function renderUsers(users) {
+            const container = document.querySelector('.card-container');
+            if (!container) {
+                console.error('Card container element not found!');
+                return;
+            }
+            users.forEach(user => {
+                const card = createCard(user);
+                container.appendChild(card);
+            });
+        }
+
+        (async function init() {
+            try {
+                const fetchedData = await fetchData();
+                renderUsers(fetchedData.data);
+            } catch (err) {
+                const container = document.querySelector('.card-container');
+                if (container) {
+                    container.innerHTML = `<div class="error-message">Failed to load data. Please try again later.</div>`;
+                }
+            }
+        })();
+
+    </script>
+
+</body>
+<script src="./CountryFinder.js"></script>
+
+</html>
