@@ -111,7 +111,6 @@ interface TreeNodeInterface {
 }
 
 const rightSideView = (node: TreeNodeInterface | null, result: RightSideViewResult = []): RightSideViewResult => {
-
     function dfs(node: TreeNodeInterface | null, level: number): void {
         if (!node) return;
         if (result.length === level) {
