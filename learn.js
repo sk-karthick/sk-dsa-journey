@@ -1,9 +1,4 @@
 
-
-// Interview Questions:
-// -----------------------
-
-
 const array = new Array(3).fill({ x: 2 })
 
 array[0] = 3;
