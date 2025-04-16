@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "tsx src/SinglyLinkedList.ts",
-    "dev": "nodemon --watch src --ext js,ts --exec tsx src/array/CountNumberPowerfulIntegers.ts"
+    "dev": "nodemon --watch src --ext js,ts --exec tsx src/array/CountNumberOfGoodSubarrays.ts"
   },
   "keywords": [],
   "author": "",
