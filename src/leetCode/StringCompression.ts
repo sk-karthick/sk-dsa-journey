@@ -1,6 +1,6 @@
 
 function compress(chars: string[]): number {
-    let write = 0; 
+    let write = 0;
     let read = 0;
 
     while (read < chars.length) {
@@ -27,3 +27,8 @@ function compress(chars: string[]): number {
 
 let chars = ["a", "a", "b", "b", "c", "c", "c"]
 console.log(compress(chars));
+
+
+
+
+

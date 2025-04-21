@@ -20,4 +20,7 @@ function countAndSay(n: number): string {
     return result
 }
 
-console.log(countAndSay(4));
+console.log(countAndSay(5));
+
+
+
