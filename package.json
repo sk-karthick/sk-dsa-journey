@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "tsx src/SinglyLinkedList.ts",
-    "dev": "nodemon --watch ReStart --ext js,ts --exec tsx ReStart/Array/FindMaxMin.ts"
+    "dev": "nodemon --watch ReStart --ext js,ts --exec tsx ReStart/TwoPointers/TwoSum.ts"
   },
   "keywords": [],
   "author": "",
