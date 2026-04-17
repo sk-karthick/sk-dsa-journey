@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "tsx src/SinglyLinkedList.ts",
-    "dev": "nodemon --watch ReStart --ext js,ts --exec tsx ReStart/TwoPointers/TwoSum.ts"
+    "dev": "nodemon --watch ReStart --ext js,ts --exec tsx ReStart/NeetCode150/TwoPointers/TwoSumII.ts"
   },
   "keywords": [],
   "author": "",
