@@ -1,5 +1,6 @@
 {
-  "watch": ["src"],
+  "watch": ["ReStart"],
   "ext": "ts",
-  "exec": "ts-node ./src/index.ts"
+  "ignore": ["node_modules"],
+  "exec": "tsx ReStart/NeetCode150/TwoPointers/TwoSumII.ts"
 }
